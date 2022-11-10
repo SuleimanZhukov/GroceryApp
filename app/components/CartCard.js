@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import ItemsCount from "./ItemsCount";
 
-function BuyCard({ title, subtitle, price, itemsCount, image }) {
+function CartCard({ title, subtitle, price, itemsCount, image }) {
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={image} />
@@ -14,7 +14,7 @@ function BuyCard({ title, subtitle, price, itemsCount, image }) {
         <Text style={styles.subtitle}>{subtitle}</Text>
         <ItemsCount
           style={styles.items}
-          text={subtitle === "Organic" ? `${itemsCount}kg` : itemsCount}
+          countText={subtitle === "Organic" ? `${itemsCount}kg` : itemsCount}
         />
       </View>
       <View style={styles.bottomContainer}>
@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontFamily: "Roboto",
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     fontWeight: "bold",
     color: colors.black,
     fontSize: 20,
   },
   subtitle: {
-    fontFamily: "Roboto",
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     fontWeight: "100",
     color: colors.mediumLight,
     fontSize: 16,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   price: {
     alignSelf: "flex-end",
-    fontFamily: "Roboto",
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     fontWeight: "bold",
     color: colors.black,
     fontSize: 16,
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BuyCard;
+export default CartCard;

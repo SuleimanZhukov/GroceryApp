@@ -1,14 +1,21 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 
-function ButtonPlus({ style }) {
+function ButtonPlus({ style, onPress }) {
   return (
-    <View style={[styles.container, style]}>
-      <MaterialCommunityIcons name="plus" color={colors.white} size={30} />
-    </View>
+    <TouchableHighlight underlayColor={colors.dark} onPress={onPress}>
+      <View style={[styles.container, style]}>
+        <MaterialCommunityIcons name="plus" color={colors.white} size={30} />
+      </View>
+    </TouchableHighlight>
   );
 }
 const styles = StyleSheet.create({

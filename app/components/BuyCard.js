@@ -4,15 +4,15 @@ import { View, StyleSheet, Image, Text } from "react-native";
 import colors from "../config/colors";
 import ButtonPlus from "./ButtonPlus";
 
-function BuyCard({ title, subtitle, price, image }) {
+function BuyCard({ title, subtitle, price, image, marginHorizontal }) {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={image} />
+    <View style={[styles.container, { marginHorizontal: marginHorizontal }]}>
+      <Image style={styles.image} source={{ uri: image }} />
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.subtitle}>{subtitle}</Text>
       <View style={styles.bottomContainer}>
         <Text style={styles.price}>{`$${price}`}</Text>
-        <ButtonPlus style={styles.button} />
+        <ButtonPlus style={styles.button} onPress={() => console.log("good")} />
       </View>
     </View>
   );
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     top: 20,
   },
   title: {
-    fontFamily: "Roboto",
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     fontWeight: "bold",
     color: colors.black,
     fontSize: 16,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginLeft: 25,
-    fontFamily: "Roboto",
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     fontWeight: "100",
     color: colors.mediumLight,
     fontSize: 14,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   price: {
-    fontFamily: "Roboto",
+    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     fontWeight: "bold",
     color: colors.black,
     fontSize: 16,

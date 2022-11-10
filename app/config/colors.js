@@ -7,4 +7,5 @@ export default {
   dark: "0c0c0c",
   medium: "#6e6969",
   mediumLight: "#adb1b5",
+  lighterMedium: "#f3f3f3",
 };

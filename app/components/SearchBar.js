@@ -4,7 +4,7 @@ import { Feather } from "@expo/vector-icons";
 
 import colors from "../config/colors";
 
-function SearchBar(props) {
+function SearchBar() {
   return (
     <View style={styles.container}>
       <Feather
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: colors.light,
     height: 50,
+    // width: "100%",
     flex: 1,
     marginVertical: 10,
     borderRadius: 15,

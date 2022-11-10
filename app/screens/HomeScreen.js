@@ -1,35 +1,68 @@
 import React from "react";
-import { View, StyleSheet, Text, FlatList, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 import Icon from "../components/Icon";
+import { LinearGradient } from "expo-linear-gradient";
 
+import AppFlatListHorizontal from "../components/AppFlatListHorizontal";
+import data from "../config/data";
 import Screen from "../components/Screen";
 import SearchBar from "../components/SearchBar";
+import colors from "../config/colors";
 
 function HomeScreen(props) {
   return (
     <Screen>
-      <Text style={styles.text}>Grocery</Text>
-      <View style={styles.searchContainer}>
-        <SearchBar />
-        <Icon style={styles.icon} />
-      </View>
-      <ScrollView>
-        <FlatList />
-      </ScrollView>
+      <LinearGradient
+        colors={[colors.white, colors.light, colors.lighterMedium]}
+      >
+        <Text style={styles.text}>Grocery</Text>
+        <View style={styles.searchContainer}>
+          <SearchBar />
+          <Icon style={styles.icon} />
+        </View>
+        <ScrollView style={styles.flatList}>
+          <AppFlatListHorizontal
+            label="Fruits"
+            data={data[0]}
+            onPress={() => console.log("good")}
+          />
+          <AppFlatListHorizontal
+            label="Vegetables"
+            data={data[1]}
+            onPress={() => console.log("good")}
+          />
+          <AppFlatListHorizontal
+            label="Meats"
+            data={data[2]}
+            onPress={() => console.log("good")}
+          />
+          <AppFlatListHorizontal
+            label="Breads"
+            data={data[3]}
+            onPress={() => console.log("good")}
+          />
+        </ScrollView>
+      </LinearGradient>
     </Screen>
   );
 }
 const styles = StyleSheet.create({
   text: {
+    marginHorizontal: 22,
     marginVertical: 20,
     fontSize: 40,
     fontWeight: "bold",
   },
   searchContainer: {
+    marginHorizontal: 22,
     flexDirection: "row",
   },
   icon: {
     marginLeft: 10,
+  },
+  flatList: {
+    marginHorizontal: 13,
+    height: 570,
   },
 });
 

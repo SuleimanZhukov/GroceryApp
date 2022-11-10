@@ -2,10 +2,10 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import colors from "../config/colors";
 
-function ItemsCount({ text, style }) {
+function ItemsCount({ countText, style }) {
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.text}>{text}</Text>
+      <Text style={styles.text}>{countText}</Text>
     </View>
   );
 }
