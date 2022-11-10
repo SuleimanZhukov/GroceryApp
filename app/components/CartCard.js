@@ -21,7 +21,7 @@ function BuyCard({ title, subtitle, price, itemsCount, image }) {
         <MaterialCommunityIcons
           style={styles.button}
           name="close"
-          color={colors.light}
+          color={colors.mediumLight}
           size={30}
         />
         <Text style={styles.price}>{`$${price}`}</Text>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: colors.white,
     borderRadius: 25,
-    margin: 10,
+    marginVertical: 10,
     flexDirection: "row",
     overflow: "hidden",
   },
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontFamily: "Roboto",
     fontWeight: "100",
-    color: colors.light,
+    color: colors.mediumLight,
     fontSize: 16,
   },
   items: {

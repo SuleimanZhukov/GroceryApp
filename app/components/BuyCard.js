@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     width: 150,
     backgroundColor: colors.white,
     borderRadius: 25,
-    margin: 10,
+    marginVertical: 10,
     overflow: "hidden",
   },
   image: {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     fontFamily: "Roboto",
     fontWeight: "100",
-    color: colors.light,
+    color: colors.mediumLight,
     fontSize: 14,
   },
   bottomContainer: {
