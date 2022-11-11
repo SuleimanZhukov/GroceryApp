@@ -5,10 +5,13 @@ import Screen from "./app/components/Screen";
 import BuyCard from "./app/components/BuyCard";
 import CartCard from "./app/components/CartCard";
 import SearchBar from "./app/components/SearchBar";
+import CartScreen from "./app/screens/CartScreen";
+import WideButton from "./app/components/WideButton";
 
 export default function App() {
   return (
-    <HomeScreen />
+    <CartScreen />
+    // <HomeScreen />
     // <Screen color="#eee">
     //   <CartCard
     //     title="Bananas"

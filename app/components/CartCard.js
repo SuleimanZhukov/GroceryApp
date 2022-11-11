@@ -8,7 +8,7 @@ import ItemsCount from "./ItemsCount";
 function CartCard({ title, subtitle, price, itemsCount, image }) {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={image} />
+      <Image style={styles.image} source={{ uri: image }} />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subtitle}>{subtitle}</Text>

@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   },
   flatList: {
     marginHorizontal: 13,
-    height: 570,
   },
 });
 
