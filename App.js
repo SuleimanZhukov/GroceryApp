@@ -7,10 +7,22 @@ import CartCard from "./app/components/CartCard";
 import SearchBar from "./app/components/SearchBar";
 import CartScreen from "./app/screens/CartScreen";
 import WideButton from "./app/components/WideButton";
+import ItemScreen from "./app/screens/ItemScreen";
+import CategoryCard from "./app/components/CategoryCard";
+import CategoryScreen from "./app/screens/CategoryScreen";
+import categoryData from "./app/config/categoryData";
 
 export default function App() {
   return (
-    <CartScreen />
+    <CategoryScreen data={categoryData} />
+    // <Screen>
+    //   <CategoryCard
+    //     title="Fruits"
+    //     image="https://www.pngarts.com/files/12/Red-Apple-Fruit-PNG-High-Quality-Image.png"
+    //   />
+    // </Screen>
+    // <ItemScreen />
+    // <CartScreen />
     // <HomeScreen />
     // <Screen color="#eee">
     //   <CartCard

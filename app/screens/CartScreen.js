@@ -8,7 +8,6 @@ import Screen from "../components/Screen";
 import AppFlatListCart from "../components/AppFlatListCart";
 import WideButton from "../components/WideButton";
 import data from "../config/data";
-import CartCard from "../components/CartCard";
 
 function CartScreen(props) {
   return (
