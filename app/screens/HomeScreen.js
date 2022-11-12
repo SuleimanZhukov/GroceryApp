@@ -8,19 +8,23 @@ import data from "../config/data";
 import Screen from "../components/Screen";
 import SearchBar from "../components/SearchBar";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
-function HomeScreen(props) {
+function HomeScreen({ navigation }) {
   return (
     <Screen>
       <LinearGradient
         colors={[colors.white, colors.light, colors.lighterMedium]}
       >
-        <Text style={styles.text}>Grocery</Text>
-        <View style={styles.searchContainer}>
-          <SearchBar />
-          <Icon style={styles.icon} />
-        </View>
         <ScrollView style={styles.flatList}>
+          <Text style={styles.text}>Grocery</Text>
+          <View style={styles.searchContainer}>
+            <SearchBar />
+            <Icon
+              style={styles.icon}
+              onPress={() => navigation.navigate(routes.CATEGORIES)}
+            />
+          </View>
           <AppFlatListHorizontal
             label="Fruits"
             data={data[0]}

@@ -23,12 +23,12 @@ function CartScreen(props) {
       >
         <View style={styles.container}>
           <View style={styles.titleContainer}>
-            <MaterialIcons
+            {/* <MaterialIcons
               style={styles.arrowBack}
               name="arrow-back-ios"
               size={30}
               color={colors.mediumLight}
-            />
+            /> */}
             <Text style={styles.title}>My Cart</Text>
           </View>
           <View style={styles.flatListContainer}>
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   titleContainer: {
+    justifyContent: "center",
     flexDirection: "row",
     paddingVertical: 20,
   },
@@ -64,7 +65,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
     alignSelf: "center",
-    flex: 2.6,
   },
   arrowBack: {
     marginLeft: 20,

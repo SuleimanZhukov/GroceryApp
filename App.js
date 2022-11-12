@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 
 import HomeScreen from "./app/screens/HomeScreen";
 import Screen from "./app/components/Screen";
@@ -11,10 +12,15 @@ import ItemScreen from "./app/screens/ItemScreen";
 import CategoryCard from "./app/components/CategoryCard";
 import CategoryScreen from "./app/screens/CategoryScreen";
 import categoryData from "./app/config/categoryData";
+import AppNavigator from "./app/navigation/AppNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
 
 export default function App() {
   return (
-    <CategoryScreen data={categoryData} />
+    <NavigationContainer theme={navigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
+    // <CategoryScreen data={categoryData} />
     // <Screen>
     //   <CategoryCard
     //     title="Fruits"
