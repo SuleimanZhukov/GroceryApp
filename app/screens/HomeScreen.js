@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import Icon from "../components/Icon";
 import { LinearGradient } from "expo-linear-gradient";
 
 import AppFlatListHorizontal from "../components/AppFlatListHorizontal";
-import data from "../config/data";
 import Screen from "../components/Screen";
 import SearchBar from "../components/SearchBar";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
+import data from "../config/data";
 
 function HomeScreen({ navigation }) {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setItems(data);
+    console.log("items", items);
+  }, []);
+
   return (
     <Screen>
       <LinearGradient

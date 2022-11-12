@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -10,9 +10,16 @@ import WideButton from "../components/WideButton";
 import data from "../config/data";
 
 function CartScreen(props) {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setItems(data);
+  }, []);
+
   return (
     <Screen style={styles.screen}>
       <LinearGradient
+        style={styles.gradient}
         colors={[
           colors.white,
           colors.lighterMedium,
@@ -21,32 +28,39 @@ function CartScreen(props) {
           colors.light,
         ]}
       >
-        <View style={styles.container}>
-          <View style={styles.titleContainer}>
-            {/* <MaterialIcons
-              style={styles.arrowBack}
-              name="arrow-back-ios"
-              size={30}
-              color={colors.mediumLight}
-            /> */}
-            <Text style={styles.title}>My Cart</Text>
+        {data && (
+          <View>
+            <View style={styles.container}>
+              <View style={styles.titleContainer}>
+                <Text style={styles.title}>Cart</Text>
+              </View>
+              <View style={styles.flatListContainer}>
+                <AppFlatListCart data={data[0]} numberOfColumns={0} />
+              </View>
+            </View>
+            <View style={styles.buttonContainer}>
+              <WideButton
+                style={styles.wideButton}
+                title="Checkout"
+                onPress={() => console.log("checked")}
+              />
+            </View>
           </View>
-          <View style={styles.flatListContainer}>
-            <AppFlatListCart data={data[0]} numberOfColumns={0} />
+        )}
+
+        {!data && (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.empty}>Cart is empty</Text>
           </View>
-        </View>
-        <View style={styles.buttonContainer}>
-          <WideButton
-            style={styles.wideButton}
-            title="Checkout"
-            onPress={() => console.log("checked")}
-          />
-        </View>
+        )}
       </LinearGradient>
     </Screen>
   );
 }
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   screen: {
     flex: 1,
   },
@@ -82,6 +96,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
+  },
+  emptyContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  empty: {
+    fontSize: 25,
   },
 });
 
