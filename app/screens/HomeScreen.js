@@ -8,14 +8,34 @@ import Screen from "../components/Screen";
 import SearchBar from "../components/SearchBar";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
-import data from "../config/data";
+import { firebase } from "../api/config";
+
+const storeRef = firebase.firestore().collection("store");
 
 function HomeScreen({ navigation }) {
   const [items, setItems] = useState([]);
 
+  const getData = async () => {
+    storeRef.onSnapshot((querySnapshot) => {
+      const comingData = [];
+      querySnapshot.forEach((doc) => {
+        const { title, subtitle, image, category, count, price } = doc.data();
+        comingData.push({
+          id: doc.id,
+          title,
+          subtitle,
+          image,
+          category,
+          count,
+          price,
+        });
+      });
+      setItems(comingData);
+    });
+  };
+
   useEffect(() => {
-    setItems(data);
-    console.log("items", items);
+    getData();
   }, []);
 
   return (
@@ -34,22 +54,23 @@ function HomeScreen({ navigation }) {
           </View>
           <AppFlatListHorizontal
             label="Fruits"
-            data={data[0]}
+            data={items.filter((item) => item.category === "fruits")}
             onPress={() => console.log("good")}
+            onPressCard={() => console.log("")}
           />
           <AppFlatListHorizontal
             label="Vegetables"
-            data={data[1]}
+            data={items.filter((item) => item.category === "vegetables")}
             onPress={() => console.log("good")}
           />
           <AppFlatListHorizontal
             label="Meats"
-            data={data[2]}
+            data={items.filter((item) => item.category === "meats")}
             onPress={() => console.log("good")}
           />
           <AppFlatListHorizontal
             label="Breads"
-            data={data[3]}
+            data={items.filter((item) => item.category === "breads")}
             onPress={() => console.log("good")}
           />
         </ScrollView>

@@ -1,20 +1,95 @@
-import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  Keyboard,
+  TouchableHighlight,
+} from "react-native";
+import { firebase } from "../api/config";
+
+const cartRef = firebase.firestore().collection("cart");
 
 import colors from "../config/colors";
 import ButtonPlus from "./ButtonPlus";
 
-function BuyCard({ title, subtitle, price, image, marginHorizontal }) {
+function BuyCard({
+  title,
+  subtitle,
+  price,
+  image,
+  count,
+  category,
+  marginHorizontal,
+  onPressCard,
+}) {
+  let cartItems = [];
   return (
-    <View style={[styles.container, { marginHorizontal: marginHorizontal }]}>
-      <Image style={styles.image} source={{ uri: image }} />
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.subtitle}>{subtitle}</Text>
-      <View style={styles.bottomContainer}>
-        <Text style={styles.price}>{`$${price}`}</Text>
-        <ButtonPlus style={styles.button} onPress={() => console.log("good")} />
+    <TouchableHighlight
+      onPress={onPressCard}
+      underlayColor={colors.lighterMedium}
+    >
+      <View style={[styles.container, { marginHorizontal: marginHorizontal }]}>
+        <>
+          <Image style={styles.image} source={{ uri: image }} />
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subtitle}>{subtitle}</Text>
+          <View style={styles.bottomContainer}>
+            <Text style={styles.price}>{`$${price}`}</Text>
+            <ButtonPlus
+              style={styles.button}
+              onPress={() => {
+                cartRef.onSnapshot((querySnapshot) => {
+                  const comingData = [];
+                  querySnapshot.forEach((doc) => {
+                    const { title, subtitle, image, category, count, price } =
+                      doc.data();
+                    comingData.push({
+                      id: doc.id,
+                      title,
+                      subtitle,
+                      image,
+                      category,
+                      count,
+                      price,
+                    });
+                  });
+                  cartItems = comingData;
+                });
+
+                let bool = false;
+                cartItems.forEach((item) => {
+                  if (item.title === title) {
+                    cartRef.doc(item.id).update({
+                      price: item.price + price,
+                      count: item.count + count,
+                    });
+                    bool = true;
+                    return;
+                  }
+                });
+
+                if (!bool) {
+                  cartRef
+                    .add({
+                      title: title,
+                      subtitle: subtitle,
+                      price: price,
+                      image: image,
+                      category: category,
+                      count: 1,
+                    })
+                    .then(() => {
+                      Keyboard.dismiss();
+                    });
+                }
+              }}
+            />
+          </View>
+        </>
       </View>
-    </View>
+    </TouchableHighlight>
   );
 }
 const styles = StyleSheet.create({

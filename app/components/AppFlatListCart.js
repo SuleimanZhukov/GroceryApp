@@ -17,6 +17,7 @@ function AppFlatListCart({ data, numberOfColumns }) {
             price={item.price}
             itemsCount={item.count}
             image={item.image}
+            id={item.id}
           />
         )}
       />

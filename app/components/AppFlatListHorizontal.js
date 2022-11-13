@@ -11,7 +11,7 @@ import {
 import colors from "../config/colors";
 import BuyCard from "./BuyCard";
 
-function AppFlatListHorizontal({ label, data, onPress }) {
+function AppFlatListHorizontal({ label, data, onPress, onPressCard }) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -30,7 +30,10 @@ function AppFlatListHorizontal({ label, data, onPress }) {
             subtitle={item.subtitle}
             price={item.price}
             image={item.image}
+            count={item.count}
+            category={item.category}
             marginHorizontal={10}
+            onPressCard={onPressCard}
           />
         )}
       />

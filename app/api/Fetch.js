@@ -1,17 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
 import { firebase } from "./config";
 
-function Fetch(props) {
-  const [data, setData] = useState();
-  const storeRef = firebase.firestore().collection("store");
+const storeRef = firebase.firestore().collection("store");
 
-  useEffect;
+const fetch = async () => {
+  storeRef.onSnapshot((querySnapshot) => {
+    const comingData = [];
+    querySnapshot.forEach((doc) => {
+      const { title, subtitle, image, category, count, price } = doc.data();
+      comingData.push({
+        id: doc.id,
+        title,
+        subtitle,
+        image,
+        category,
+        count,
+        price,
+      });
+    });
+    // console.log(comingData);
+    return comingData;
+  });
+};
 
-  return <View style={styles.container}></View>;
-}
-const styles = StyleSheet.create({
-  container: {},
-});
-
-export default Fetch;
+export default {
+  fetch,
+};

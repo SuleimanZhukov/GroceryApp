@@ -1,11 +1,21 @@
 import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { firebase } from "../api/config";
 
 import colors from "../config/colors";
 import ItemsCount from "./ItemsCount";
 
-function CartCard({ title, subtitle, price, itemsCount, image }) {
+const cartRef = firebase.firestore().collection("cart");
+
+function CartCard({ title, subtitle, price, itemsCount, image, id }) {
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={{ uri: image }} />
@@ -18,12 +28,23 @@ function CartCard({ title, subtitle, price, itemsCount, image }) {
         />
       </View>
       <View style={styles.bottomContainer}>
-        <MaterialCommunityIcons
-          style={styles.button}
-          name="close"
-          color={colors.mediumLight}
-          size={30}
-        />
+        <TouchableWithoutFeedback
+          onPress={() => {
+            cartRef
+              .doc(id)
+              .delete()
+              .then(() => {
+                console.log("");
+              });
+          }}
+        >
+          <MaterialCommunityIcons
+            style={styles.button}
+            name="close"
+            color={colors.mediumLight}
+            size={30}
+          />
+        </TouchableWithoutFeedback>
         <Text style={styles.price}>{`$${price}`}</Text>
       </View>
     </View>

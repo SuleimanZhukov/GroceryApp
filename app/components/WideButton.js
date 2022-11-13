@@ -5,12 +5,12 @@ import colors from "../config/colors";
 
 function WideButton({ title, style, onPress }) {
   return (
-    <View style={styles.ultimateContainer}>
+    <View style={[styles.ultimateContainer, style]}>
       <TouchableHighlight
         underlayColor={colors.lighterMedium}
         onPress={onPress}
       >
-        <View style={[styles.container, style]}>
+        <View style={styles.container}>
           <Text style={styles.title}>{title}</Text>
         </View>
       </TouchableHighlight>
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     borderRadius: 15,
     overflow: "hidden",
+    width: "100%",
   },
   container: {
     justifyContent: "center",
