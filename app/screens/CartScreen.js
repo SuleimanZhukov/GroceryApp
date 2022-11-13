@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, ImageEditor } from "react-native";
+import { View, StyleSheet, Text, ScrollView, ImageEditor } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -13,8 +13,7 @@ const cartRef = firebase.firestore().collection("cart");
 
 function CartScreen(props) {
   const [items, setItems] = useState([]);
-  const [allPrice, setAllPrice] = useState(0);
-  let price = 0;
+
   const getData = async () => {
     cartRef.onSnapshot((querySnapshot) => {
       const comingData = [];
@@ -31,10 +30,6 @@ function CartScreen(props) {
         });
       });
       setItems(comingData);
-      comingData.forEach((item) => {
-        price += item.price;
-      });
-      setAllPrice(price);
     });
   };
 
@@ -56,31 +51,28 @@ function CartScreen(props) {
       >
         {items && (
           <View>
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
               <View style={styles.titleContainer}>
                 <Text style={styles.title}>Cart</Text>
               </View>
               <View style={styles.flatListContainer}>
                 <AppFlatListCart data={items} numberOfColumns={0} />
               </View>
-            </View>
-            <View style={styles.buttonContainer}>
-              <WideButton
-                style={styles.wideButton}
-                title={`$${allPrice} Checkout`}
-                onPress={() => {
-                  setAllPrice(0);
-                  items.forEach((item) => {
-                    cartRef
-                      .doc(item.id)
-                      .delete()
-                      .then(() => {
-                        console.log("");
-                      });
-                  });
-                }}
-              />
-            </View>
+            </ScrollView>
+            <WideButton
+              style={styles.wideButton}
+              title="Checkout"
+              onPress={() => {
+                items.forEach((item) => {
+                  cartRef
+                    .doc(item.id)
+                    .delete()
+                    .then(() => {
+                      console.log("");
+                    });
+                });
+              }}
+            />
           </View>
         )}
 
@@ -116,15 +108,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
   },
-  buttonContainer: {
-    flex: 1,
-    alignSelf: "center",
-    // flexDirection: "column",
-    // marginHorizontal: 20,
-  },
   wideButton: {
     bottom: 25,
-    // flex: 1,
+    flex: 1,
     position: "absolute",
   },
   emptyContainer: {

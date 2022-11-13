@@ -25,6 +25,7 @@ function BuyCard({
   onPressCard,
 }) {
   let cartItems = [];
+
   return (
     <TouchableHighlight
       onPress={onPressCard}
